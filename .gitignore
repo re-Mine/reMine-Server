@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 
 # key files
-application-MYSQL.properties
+application-SECRET.properties
 
 ### STS ###
 .apt_generated
