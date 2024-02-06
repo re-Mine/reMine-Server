@@ -1,1 +1,1 @@
-# reMine-Server
+# re:Mine Server Repository
