@@ -26,9 +26,4 @@ public class RequestOAuthInfoService {
         String accessToken = client.requestAccessToken(params);
         return client.requestOauthInfo(accessToken);
     }
-
-    public void unlink(OAuthProvider oAuthProvider, String socialAccessToken) {
-        final OAuthApiClient oAuthApiClient = clients.get(oAuthProvider);
-        oAuthApiClient.requestUnlink(socialAccessToken);
-    }
 }

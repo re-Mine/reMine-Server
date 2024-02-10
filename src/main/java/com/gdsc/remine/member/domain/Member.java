@@ -21,25 +21,18 @@ public class Member extends BaseEntity {
 
     private String name;
 
-    private String nickname;
-
     private String profileImage;
 
     private String email;
 
     private String socialId;
 
-    @Setter
-    private String socialAccessToken;
-
     @Builder
-    public Member(OAuthProvider oAuthProvider, String name, String nickname, String profileImage, String email, String socialId, String socialAccessToken) {
+    public Member(OAuthProvider oAuthProvider, String name, String profileImage, String email, String socialId) {
         this.oAuthProvider = oAuthProvider;
         this.name = name;
-        this.nickname = nickname;
         this.profileImage = profileImage;
         this.email = email;
         this.socialId = socialId;
-        this.socialAccessToken = socialAccessToken;
     }
 }

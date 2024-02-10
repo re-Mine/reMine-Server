@@ -31,19 +31,17 @@ public class OAuthLoginService {
     private Long findOrCreateMember(OAuthInfoResponse oAuthInfoResponse) {
         final Member member = memberRepository.findBySocialId(oAuthInfoResponse.getSocialId())
                 .orElseGet(() -> newMember(oAuthInfoResponse));
-        member.setSocialAccessToken(oAuthInfoResponse.getAccessToken());
         return member.getId();
     }
 
     private Member newMember(OAuthInfoResponse oAuthInfoResponse) {
         Member member = Member.builder()
                 .socialId(oAuthInfoResponse.getSocialId())
-                .name(oAuthInfoResponse.getNickname())
                 .profileImage(oAuthInfoResponse.getProfileImage())
+                .name(oAuthInfoResponse.getName())
+                .email(oAuthInfoResponse.getEmail())
                 .oAuthProvider(oAuthInfoResponse.getOAuthProvider())
-                .socialAccessToken(oAuthInfoResponse.getAccessToken())
                 .build();
-
         return memberRepository.save(member);
     }
 }

@@ -60,6 +60,8 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         String errorPoint = e.getMessage();
         ApiResponse<Object> body = ApiResponse.onFailure(errorCommonStatus.getCode(), errorCommonStatus.getMessage(), errorPoint);
 
+        System.out.println(e);
+
         return super.handleExceptionInternal(
                 e,
                 body,
