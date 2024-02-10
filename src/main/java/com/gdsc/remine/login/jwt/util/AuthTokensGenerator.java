@@ -17,7 +17,6 @@ import static com.gdsc.remine.global.api_payload.code.status.ErrorStatus.INVALID
 @Component
 @RequiredArgsConstructor
 public class AuthTokensGenerator {
-    private static final String BEARER_TYPE = "Bearer";
     private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 5;        // 5 Hour
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7;  // 7 Day
 
@@ -33,7 +32,7 @@ public class AuthTokensGenerator {
         String accessToken = jwtTokenProvider.generate(subject, accessTokenExpiredAt);
         String refreshToken = jwtTokenProvider.generate(subject, refreshTokenExpiredAt);
 
-        return AuthTokens.of(accessToken, refreshToken, BEARER_TYPE, ACCESS_TOKEN_EXPIRE_TIME / 1000L);
+        return AuthTokens.of(accessToken, refreshToken, ACCESS_TOKEN_EXPIRE_TIME / 1000L);
     }
 
     private Long extractMemberId(String accessToken) {
