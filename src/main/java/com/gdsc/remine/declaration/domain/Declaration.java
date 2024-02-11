@@ -24,4 +24,6 @@ public class Declaration extends BaseEntity {
     private Member member;
 
     private String audioFileURL;
+
+    private String content;
 }
