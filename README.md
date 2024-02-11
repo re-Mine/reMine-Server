@@ -1,1 +1,1 @@
-# re:Mine Server Repository
+# 🖇️re:Mine Server Repository
