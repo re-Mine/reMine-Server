@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class PostElement {
     private String name;
     private String profileImage;
+    private Long postId;
     private LocalDateTime createdDate;
     private String content;
     private Boolean isLike;
@@ -24,6 +25,7 @@ public class PostElement {
         final Member member = post.getMember();
         this.name = member.getName();
         this.profileImage = member.getProfileImage();
+        this.postId = post.getId();
         this.createdDate = post.getCreatedDate();
         this.content = post.getContent();
     }

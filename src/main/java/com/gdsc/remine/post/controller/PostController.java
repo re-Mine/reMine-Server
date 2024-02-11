@@ -2,8 +2,11 @@ package com.gdsc.remine.post.controller;
 
 import com.gdsc.remine.global.api_payload.ApiResponse;
 import com.gdsc.remine.post.dto.response.CommunityPageResponse;
+import com.gdsc.remine.post.dto.response.UpdatesPageResponse;
 import com.gdsc.remine.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,5 +20,12 @@ public class PostController {
     @GetMapping("")
     ApiResponse<CommunityPageResponse> getCommunityPage() {
         return ApiResponse.onSuccess(postService.getCommunityPage());
+    }
+
+    @GetMapping("/updates")
+    ApiResponse<UpdatesPageResponse> getUpdatesCommunityPage(
+            @PageableDefault(size = 30) Pageable pageable
+    ) {
+        return ApiResponse.onSuccess(postService.getUpdatesCommunityPage(pageable));
     }
 }

@@ -53,13 +53,10 @@ public class GoogleApiClient implements OAuthApiClient {
         body.add("client_secret", clientSecret);
         body.add("redirect_uri", redirectUri);
         body.add("grant_type", GRANT_TYPE);
-
         HttpEntity<?> request = new HttpEntity<>(body, httpHeaders);
 
         final GoogleTokens googleTokens = restTemplate.postForObject(tokenUri, request, GoogleTokens.class);
-
         assert googleTokens != null;
-        System.out.println("access token : " + googleTokens.getAccessToken());
         return googleTokens.getAccessToken();
     }
 
@@ -70,8 +67,6 @@ public class GoogleApiClient implements OAuthApiClient {
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         HttpEntity<?> request = new HttpEntity<>(httpHeaders);
-        System.out.println(restTemplate.exchange(resourceUri, HttpMethod.GET, request, String.class).getBody());
-
         return restTemplate.exchange(resourceUri, HttpMethod.GET, request, GoogleInfoResponse.class).getBody();
     }
 }
