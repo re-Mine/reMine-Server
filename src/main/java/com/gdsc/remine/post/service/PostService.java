@@ -1,5 +1,7 @@
 package com.gdsc.remine.post.service;
 
+import com.gdsc.remine.comment.domain.Comment;
+import com.gdsc.remine.comment.domain.repository.CommentRepository;
 import com.gdsc.remine.declaration.domain.Declaration;
 import com.gdsc.remine.declaration.domain.repository.DeclarationRepository;
 import com.gdsc.remine.login.jwt.util.AuthTokensGenerator;
@@ -7,6 +9,7 @@ import com.gdsc.remine.post.domain.Post;
 import com.gdsc.remine.post.domain.repository.CustomPostRepository;
 import com.gdsc.remine.post.domain.repository.PostRepository;
 import com.gdsc.remine.post.dto.response.CommunityPageResponse;
+import com.gdsc.remine.post.dto.response.PostDetailResponse;
 import com.gdsc.remine.post.dto.response.PostElement;
 import com.gdsc.remine.post.dto.response.UpdatesPageResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +24,7 @@ import java.util.List;
 public class PostService {
     private final PostRepository postRepository;
     private final CustomPostRepository customPostRepository;
+    private final CommentRepository commentRepository;
     private final DeclarationRepository declarationRepository;
     private final AuthTokensGenerator authTokensGenerator;
 
@@ -41,5 +45,16 @@ public class PostService {
                 postList,
                 previewPostPage
         );
+    }
+
+    public PostDetailResponse getDetailPostInfo(Long postId, Pageable pageable) {
+        final Long loginMemberId = authTokensGenerator.getLoginMemberId();
+        final PostDetailResponse detailResponse = customPostRepository.findDetailPostInfo(
+                loginMemberId,
+                postId
+        );
+        final Page<Comment> commentPage = commentRepository.findCommentsByPost(postId, pageable);
+        detailResponse.setCommentPage(commentPage);
+        return detailResponse;
     }
 }
