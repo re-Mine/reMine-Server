@@ -12,10 +12,12 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PrivateDeclarationElements {
+    private String memberName;
     private Long todayParticipantsCount;
     private List<PrivateDeclarationElement> declarationList;
 
     public static PrivateDeclarationElements from(
+            String memberName,
             Long todayParticipantsCount,
             List<Declaration> declarationList
     ) {
@@ -23,6 +25,10 @@ public class PrivateDeclarationElements {
                 PrivateDeclarationElement::new
         ).collect(Collectors.toList());
 
-        return new PrivateDeclarationElements(todayParticipantsCount, declarationElementList);
+        return new PrivateDeclarationElements(
+                memberName,
+                todayParticipantsCount,
+                declarationElementList
+        );
     }
 }

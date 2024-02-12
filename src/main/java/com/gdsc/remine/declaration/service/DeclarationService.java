@@ -42,18 +42,19 @@ public class DeclarationService {
     }
 
     public PrivateDeclarationElements getDeclarationInWeek() {
-        final Long loginMemberId = authTokensGenerator.getLoginMemberId();
+        final Member loginMember = authTokensGenerator.getLoginMember();
 
         final LocalDateTime oneWeekAgo = getOneWeekAgoDate();
         final List<Declaration> declarationList = declarationRepository.findInRecent7Day(
                 oneWeekAgo,
-                loginMemberId
+                loginMember.getId()
         );
 
         final LocalDateTime oneDayAgo = getOneDayAgoDate();
         final Long count = declarationRepository.countInRecent1Day(oneDayAgo);
 
         return PrivateDeclarationElements.from(
+                loginMember.getName(),
                 count,
                 declarationList
         );
