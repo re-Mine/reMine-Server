@@ -27,12 +27,28 @@ public class Member extends BaseEntity {
 
     private String socialId;
 
+    @Setter
+    private String socialRefreshToken;
+
+    @Setter
+    private String authRefreshToken;
+
     @Builder
-    public Member(OAuthProvider oAuthProvider, String name, String profileImage, String email, String socialId) {
+    public Member(
+            final OAuthProvider oAuthProvider,
+            final String name,
+            final String profileImage,
+            final String email,
+            final String socialId,
+            final String socialRefreshToken,
+            final String authRefreshToken
+    ) {
         this.oAuthProvider = oAuthProvider;
         this.name = name;
         this.profileImage = profileImage;
         this.email = email;
         this.socialId = socialId;
+        this.socialRefreshToken = socialRefreshToken;
+        this.authRefreshToken = authRefreshToken;
     }
 }

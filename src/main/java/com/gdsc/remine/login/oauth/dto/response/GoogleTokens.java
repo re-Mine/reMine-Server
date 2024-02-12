@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GoogleTokens {
+public class GoogleTokens implements SocialTokens {
+
     @JsonProperty("access_token")
     private String accessToken;
 
