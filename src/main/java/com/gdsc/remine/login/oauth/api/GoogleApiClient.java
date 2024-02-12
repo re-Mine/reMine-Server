@@ -4,6 +4,7 @@ import com.gdsc.remine.login.oauth.dto.request.OAuthLoginParams;
 import com.gdsc.remine.login.oauth.dto.response.GoogleInfoResponse;
 import com.gdsc.remine.login.oauth.dto.response.GoogleTokens;
 import com.gdsc.remine.login.oauth.dto.response.OAuthInfoResponse;
+import com.gdsc.remine.login.oauth.dto.response.SocialTokens;
 import com.gdsc.remine.member.domain.OAuthProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +45,7 @@ public class GoogleApiClient implements OAuthApiClient {
     }
 
     @Override
-    public String requestAccessToken(OAuthLoginParams params) {
+    public SocialTokens requestAccessToken(OAuthLoginParams params) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
@@ -57,13 +58,13 @@ public class GoogleApiClient implements OAuthApiClient {
 
         final GoogleTokens googleTokens = restTemplate.postForObject(tokenUri, request, GoogleTokens.class);
         assert googleTokens != null;
-        return googleTokens.getAccessToken();
+        return googleTokens;
     }
 
     @Override
-    public OAuthInfoResponse requestOauthInfo(String accessToken) {
+    public OAuthInfoResponse requestOauthInfo(SocialTokens socialTokens) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Authorization", "Bearer " + accessToken);
+        httpHeaders.set("Authorization", "Bearer " + socialTokens.getAccessToken());
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         HttpEntity<?> request = new HttpEntity<>(httpHeaders);

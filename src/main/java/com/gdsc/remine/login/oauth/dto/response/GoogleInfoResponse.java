@@ -1,5 +1,6 @@
 package com.gdsc.remine.login.oauth.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gdsc.remine.member.domain.OAuthProvider;
 import lombok.Getter;

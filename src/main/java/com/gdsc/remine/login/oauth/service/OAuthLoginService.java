@@ -22,19 +22,20 @@ public class OAuthLoginService {
     private final RequestOAuthInfoService requestOAuthInfoService;
 
     @Transactional
-    public AuthTokens login(OAuthLoginParams params) {
-        OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(params);
-        Long memberId = findOrCreateMember(oAuthInfoResponse);
-        return authTokensGenerator.generate(memberId);
+    public AuthTokens login(final OAuthLoginParams params) {
+        final OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(params);
+        final Member member = findOrCreateMember(oAuthInfoResponse);
+        final AuthTokens authTokens = authTokensGenerator.generate(member.getId());
+        member.setAuthRefreshToken(authTokens.getRefreshToken());
+        return authTokens;
     }
 
-    private Long findOrCreateMember(OAuthInfoResponse oAuthInfoResponse) {
-        final Member member = memberRepository.findBySocialId(oAuthInfoResponse.getSocialId())
+    private Member findOrCreateMember(final OAuthInfoResponse oAuthInfoResponse) {
+        return memberRepository.findBySocialId(oAuthInfoResponse.getSocialId())
                 .orElseGet(() -> newMember(oAuthInfoResponse));
-        return member.getId();
     }
 
-    private Member newMember(OAuthInfoResponse oAuthInfoResponse) {
+    private Member newMember(final OAuthInfoResponse oAuthInfoResponse) {
         Member member = Member.builder()
                 .socialId(oAuthInfoResponse.getSocialId())
                 .profileImage(oAuthInfoResponse.getProfileImage())

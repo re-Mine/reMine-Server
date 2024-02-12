@@ -3,6 +3,7 @@ package com.gdsc.remine.login.oauth.service;
 import com.gdsc.remine.login.oauth.api.OAuthApiClient;
 import com.gdsc.remine.login.oauth.dto.request.OAuthLoginParams;
 import com.gdsc.remine.login.oauth.dto.response.OAuthInfoResponse;
+import com.gdsc.remine.login.oauth.dto.response.SocialTokens;
 import com.gdsc.remine.member.domain.OAuthProvider;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public class RequestOAuthInfoService {
 
     public OAuthInfoResponse request(OAuthLoginParams params) {
         OAuthApiClient client = clients.get(params.oAuthProvider());
-        String accessToken = client.requestAccessToken(params);
-        return client.requestOauthInfo(accessToken);
+        SocialTokens socialTokens = client.requestAccessToken(params);
+        return client.requestOauthInfo(socialTokens);
     }
 }
