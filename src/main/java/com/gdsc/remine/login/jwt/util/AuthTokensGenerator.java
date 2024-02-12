@@ -43,7 +43,6 @@ public class AuthTokensGenerator {
         HttpServletRequest httpServletRequest
                 = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         final String accessToken = httpServletRequest.getHeader("Authorization");
-        System.out.println("Received accessToken: " + accessToken);  // 확인용 로그 추가
         return extractMemberId(accessToken);
     }
 

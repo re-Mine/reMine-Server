@@ -8,6 +8,7 @@ build/
 # key files
 application-SECRET.properties
 keystore.p12
+solution-challenge-413407-106d88c2fc71.json
 
 ### STS ###
 .apt_generated
