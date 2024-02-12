@@ -1,6 +1,7 @@
 package com.gdsc.remine.declaration.controller;
 
 import com.gdsc.remine.declaration.dto.response.PrivateDeclarationElement;
+import com.gdsc.remine.declaration.dto.response.PrivateDeclarationElements;
 import com.gdsc.remine.declaration.service.DeclarationService;
 import com.gdsc.remine.global.api_payload.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,10 @@ public class DeclarationController {
             @RequestParam(value = "content") final String content
     ) {
         return ApiResponse.onSuccess(declarationService.uploadDeclaration(audioFile, content));
+    }
+
+    @GetMapping("")
+    public ApiResponse<PrivateDeclarationElements> getDeclarationInWeek() {
+        return ApiResponse.onSuccess(declarationService.getDeclarationInWeek());
     }
 }
