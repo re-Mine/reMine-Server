@@ -1,4 +1,5 @@
-🖇️re:Mine Server Repository
+# <img width="50" src="https://github.com/5jisoo/5jisoo/assets/96935231/4ad1dbf0-4bec-461f-b1d1-6e9687ea87b2"/> re:Mine Server Repository
+
 ## Architecture
 ![그림1](https://github.com/re-Mine/reMine-Server/assets/96935231/59a63481-7a67-4d82-a9eb-d7ed9a9a2597)
 
