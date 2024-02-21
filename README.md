@@ -54,5 +54,5 @@ You should get a response similar to this:
 The backend is done with
 - Java `17`
 - Spring Boot `3.3.2`
-- Gradle 8.5
+- Gradle `8.5`
 - Spring Data JPA, OAuth2, Spring Cloud GCP, lombok and so on.
